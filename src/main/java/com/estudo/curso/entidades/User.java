@@ -3,7 +3,7 @@ package com.estudo.curso.entidades;
 import java.io.Serializable;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -13,7 +13,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     private String name;
     private String email;
@@ -21,6 +21,13 @@ public class User implements Serializable {
     private String password;
 
     public User() { }
+
+    public User(String name, String email, String phone, String password) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
 
     public User(Long id, String name, String email, String phone, String password) {
         
@@ -89,8 +96,8 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (id == 1) {
+			if (other.id != 1)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.estudo.curso.entidades.User;
 import com.estudo.curso.repositories.UserRepository;
@@ -17,7 +18,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private UserRepository userRepository;
 
+    
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
