@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_category")
 public class Category implements Serializable {
     private static final long serialVersionUID = 42L;
 
@@ -65,13 +65,6 @@ public class Category implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-    
-    
-    
+    }   
 
 }
