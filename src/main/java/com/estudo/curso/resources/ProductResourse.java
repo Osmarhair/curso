@@ -6,30 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.estudo.curso.entidades.Category;
-import com.estudo.curso.services.CategoryService;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.estudo.curso.entidades.Product;
 
 
 @RestController
-@RequestMapping(value = "/Categories")
-public class CategoryResurse {
+@RequestMapping(value = "/Products")
+public class ProductResourse {
     
     @Autowired
-    private CategoryService service;
+    private ProductService service;
     
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
+    public ResponseEntity<List<Product>> findAll() {
      
-        List<Category> list = service.findAll();
+        @SuppressWarnings("unchecked")
+        List<Product> list = (List<Product>) service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Category> findById(@RequestParam Long id) {
-        Category obj = service.findById(id);
+    public ResponseEntity<ResponseEntity<Product>> findById(@RequestParam Long id) {
+        ResponseEntity<Product> obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
     

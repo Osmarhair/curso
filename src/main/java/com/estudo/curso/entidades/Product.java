@@ -2,6 +2,7 @@ package com.estudo.curso.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -104,6 +105,16 @@ public class Product implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public List<Product> findAll() {
+        
+        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    }
+
+    public Product findById(Long id2) {
+        
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
 

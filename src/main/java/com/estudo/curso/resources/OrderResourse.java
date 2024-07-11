@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping(value = "/Orders")
-public class OrderResurse {
+public class OrderResourse {
     
     @Autowired
     private OrderService service;
