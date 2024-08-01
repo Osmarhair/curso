@@ -12,7 +12,7 @@ public enum OrderStatus {
     private OrderStatus(int code) {
         this.code = code;
     }
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
@@ -25,4 +25,8 @@ public enum OrderStatus {
     }
         return null;
 }
+    OrderStatus valueOf(OrderStatus orderStatus) {
+        
+        throw new UnsupportedOperationException("Unimplemented method 'valueOf'");
+    }
 }

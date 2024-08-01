@@ -2,25 +2,24 @@ package com.estudo.curso.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import com.estudo.curso.entidades.Product;
 import jakarta.persistence.Table;
-
+import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "tb_produtc")
+@Table(name = "tb_product")
 public class Product implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
-    @jakarta.persistence.GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
@@ -29,11 +28,15 @@ public class Product implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
-     joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
+    
+    @Transient
     private Set<Category> categories = new HashSet<>();
 
+   
     public Product() {
-
+        
     }
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
@@ -113,17 +116,5 @@ public class Product implements Serializable {
         return true;
     }
 
-    public List<Product> findAll() {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
-    }
-
-    public Product findById(Long id2) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
-    }
-
-
-    
-
+      
 }
