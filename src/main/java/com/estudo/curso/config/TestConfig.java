@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.estudo.curso.entidades.Category;
 import com.estudo.curso.entidades.Order;
+import com.estudo.curso.entidades.OrderItem;
 import com.estudo.curso.entidades.Product;
 import com.estudo.curso.entidades.User;
 import com.estudo.curso.entidades.enums.OrderStatus;
 import com.estudo.curso.repositories.CategoryRepository;
+import com.estudo.curso.repositories.OrderItemRepository;
 import com.estudo.curso.repositories.OrderRepository;
 import com.estudo.curso.repositories.ProductRepository;
 import com.estudo.curso.repositories.UserRepository;
@@ -31,6 +33,9 @@ public class TestConfig<produtcRepository> implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -71,5 +76,12 @@ public class TestConfig<produtcRepository> implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
     }
 }

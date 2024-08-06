@@ -2,16 +2,19 @@ package com.estudo.curso.entidades;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.estudo.curso.entidades.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,7 +23,7 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
@@ -32,6 +35,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() { }
 
@@ -76,6 +82,10 @@ public class Order implements Serializable {
         this.client = client;
     }
 
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -100,7 +110,5 @@ public class Order implements Serializable {
             return false;
         return true;
     }
-
-    
 
 }
