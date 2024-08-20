@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import com.estudo.curso.entidades.User;
 import com.estudo.curso.repositories.UserRepository;
 import com.estudo.curso.services.exceptions.DatabaseException;
+import com.estudo.curso.services.exceptions.ResouseNotFoundException;
+
+import jakarta.persistence.EntityExistsException;
 
 @Service
 public class UserService {
@@ -43,9 +46,13 @@ public class UserService {
     }
 
     public User update(Long id, User obj) {
+        try {
         User entity = repository.getReferenceById(id);
         updadeData(entity, obj);
         return repository.save(entity);
+        } catch (EntityExistsException e) {
+            throw new ResouseNotFoundException(id);
+        }
     }
 
     private void updadeData(User entity, User obj) {
